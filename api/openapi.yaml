@@ -1,0 +1,143 @@
+openapi: 3.0.1
+info:
+  contact:
+    email: lampralexandros@gmail.com
+  description: This is a sample openApi document
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://wabli.netlify.app/
+  title: TempApi
+  version: 1.0.0
+externalDocs:
+  description: Find out more about Swagger
+  url: http://swagger.io
+servers:
+- description: Local server
+  url: http://localhost:8080/v1
+security:
+- {}
+tags:
+- description: not yet ready
+  name: form
+paths:
+  /form:
+    post:
+      operationId: createform
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/form'
+        description: data to be created
+        required: true
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/form'
+          description: seccessful operation
+      summary: Creates the data
+      tags:
+      - form
+      x-eov-operation-handler: controllers/FormController
+  /form/{formId}:
+    delete:
+      operationId: deleteform
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: formId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          description: successful operation
+      summary: Delete the element
+      tags:
+      - form
+      x-eov-operation-handler: controllers/FormController
+    get:
+      operationId: getform
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: formId
+        required: true
+        schema:
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/form'
+          description: seccessful operation
+      summary: Get the element
+      tags:
+      - form
+      x-eov-operation-handler: controllers/FormController
+    put:
+      operationId: updateform
+      parameters:
+      - description: the Id parameter
+        explode: false
+        in: path
+        name: formId
+        required: true
+        schema:
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/form'
+        description: data to be updated
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/form'
+          description: seccessful operation
+      summary: Updates the element
+      tags:
+      - form
+      x-eov-operation-handler: controllers/FormController
+  /form/getAll:
+    get:
+      operationId: getAllform
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/form'
+                type: array
+          description: successful operation
+      summary: Get all the data
+      tags:
+      - form
+      x-eov-operation-handler: controllers/FormController
+components:
+  schemas:
+    form:
+      example:
+        formName: formName
+        _id: _id
+      properties:
+        _id:
+          type: string
+        formName:
+          type: string
+      required:
+      - formName
+      type: object
